@@ -21,11 +21,13 @@ const Register: React.FC = () => {
       email: '',
       password: '',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       register(values)
     },
   });
+
+  console.log(formik.errors)
   return (
     <main className="container mx-auto px-4">
       <div className="mt-16 flex justify-center">
@@ -49,7 +51,7 @@ const Register: React.FC = () => {
                   placeholder="Type your username here"
                   type="text"
                   value={formik.values.fullName}
-                  label="FullName"
+                  label="Full Name"
                 />
 
                 <FormInput
