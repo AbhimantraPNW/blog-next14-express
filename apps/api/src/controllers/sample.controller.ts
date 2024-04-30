@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import prisma from '@/prisma';
 
 export class SampleController {
-  async getSampleData(req: Request, res: Response) {
+  async getSampleData(req: Request, res: Response, next: NextFunction) {
     const sampleData = await prisma.sample.findMany();
 
     return res.status(200).send(sampleData);
