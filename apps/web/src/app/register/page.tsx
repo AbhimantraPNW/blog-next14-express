@@ -27,7 +27,6 @@ const Register: React.FC = () => {
     },
   });
 
-  console.log(formik.errors)
   return (
     <main className="container mx-auto px-4">
       <div className="mt-16 flex justify-center">
