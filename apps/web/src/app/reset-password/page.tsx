@@ -9,23 +9,30 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import useResetPassword from '@/hooks/api/auth/useResetPassword';
 import { useFormik } from 'formik';
+import { notFound, useSearchParams } from 'next/navigation';
 import { validationSchema } from './validationSchema';
-import useLogin from '@/hooks/api/auth/useLogin';
-import { useRouter } from 'next/navigation';
 
-const Login = () => {
-  const router = useRouter()
-  const { login } = useLogin();
+const ResetPassword = () => {
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+
+  if (!token) {
+    notFound();
+  }
+
+  const { resetPassword, isLoading } = useResetPassword();
+
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        email: '',
         password: '',
+        confirmPassword: '',
       },
-      validationSchema: validationSchema,
-      onSubmit: async (values) => {
-        login(values);
+      validationSchema,
+      onSubmit: ({ password }) => {
+        resetPassword(password, token);
       },
     });
 
@@ -35,24 +42,12 @@ const Login = () => {
         <Card className="w-[350px] ">
           <CardHeader className="space-y-4">
             <CardTitle className="text-center text-2xl ">
-              Login
+              Reset Password
             </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <div className="grid w-full items-center gap-4">
-                <FormInput
-                  name="email"
-                  error={errors.email}
-                  isError={!!touched.email && !!errors.email}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="example@mail.com"
-                  type="email"
-                  value={values.email}
-                  label="Email"
-                />
-
                 <FormInput
                   name="password"
                   error={errors.password}
@@ -64,9 +59,23 @@ const Login = () => {
                   value={values.password}
                   label="Password"
                 />
-                <p className='cursor-pointer text-xs text-end' onClick={() => router.push("/forgot-password")}>Forgot Password?</p>
+
+                <FormInput
+                  name="confirmPassword"
+                  error={errors.confirmPassword}
+                  isError={
+                    !!touched.confirmPassword && !!errors.confirmPassword
+                  }
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  type="password"
+                  value={values.confirmPassword}
+                  label="Confirm Password"
+                />
+
                 <Button type="submit" className=" mt-6 w-full text-white">
-                  Login
+                  Submit
                 </Button>
               </div>
             </form>
@@ -80,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

@@ -15,7 +15,7 @@ export const forgotPasswordService = async (email: string) => {
 
     const token = sign({ id: user.id }, JWT_SECRET, { expiresIn: '30m' });
 
-    const link = NEXT_BASE_URL + `/reset=password?token=${token}`;
+    const link = NEXT_BASE_URL + `/reset-password?token=${token}`;
 
     await transporter.sendMail({
       from: 'Admin',

@@ -32,7 +32,7 @@ const ForgotPassword = () => {
       <div className="mt-16 flex justify-center">
         <Card className="w-[350px] ">
           <CardHeader className="space-y-4">
-            <CardTitle className="text-center text-2xl ">Login</CardTitle>
+            <CardTitle className="text-center text-2xl ">Forgot Password</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
