@@ -30,7 +30,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
       <section className="mb-4">
         <div className="mb-4 space-y-1.5">
           <Badge variant="outline" className="rounded-sm bg-green-100">
-            category
+            {blog.category}
           </Badge>
           <h1 className="text-2xl font-semibold">{blog.title}</h1>
           <div className="flex mb-2 items-center justify-between">
