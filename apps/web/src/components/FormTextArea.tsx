@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { HTMLInputTypeAttribute } from 'react';
 import { FormikHandlers } from 'formik';
-import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { Textarea } from './ui/textarea';
 
-interface FormInputProps {
+interface FormTextAreaProps {
   name: string;
   placeholder: string;
-  type: HTMLInputTypeAttribute;
   onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
   value: string;
@@ -17,11 +15,10 @@ interface FormInputProps {
   label: string;
 }
 
-const FormInput: React.FC<FormInputProps> = ({
-  label,
+const FormTextArea: React.FC<FormTextAreaProps> = ({
   name,
+  label,
   placeholder,
-  type,
   onChange,
   onBlur,
   value,
@@ -33,10 +30,11 @@ const FormInput: React.FC<FormInputProps> = ({
       <Label htmlFor={name} className={isError ? 'text-red-500' : ''}>
         {label}
       </Label>
-      <Input
+      <Textarea
         name={name}
         placeholder={placeholder}
-        type={type}
+        style={{ resize: 'none' }}
+        rows={4}
         onChange={onChange}
         onBlur={onBlur}
         value={value}
@@ -46,4 +44,4 @@ const FormInput: React.FC<FormInputProps> = ({
   );
 };
 
-export default FormInput;
+export default FormTextArea;
