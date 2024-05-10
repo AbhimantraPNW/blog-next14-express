@@ -15,7 +15,7 @@ export const Navbar = () => {
   };
   return (
     <nav className="sticky top-0 z-50 bg-transparent">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           <h1>Logo</h1>
 
