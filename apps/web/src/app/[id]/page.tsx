@@ -5,17 +5,30 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import useGetBlog from '@/hooks/api/blog/useGetBlog';
 import { format } from 'date-fns';
-import { Edit, Share2 } from 'lucide-react';
+import { Edit, Share2, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import SkeletonBlogDetail from '../components/SkeletonBlogDetail';
 import { appConfig } from '@/utils/config';
 import { useRouter } from 'next/navigation';
 import { useAppSelector } from '@/redux/hooks';
+import useDeleteBlog from '@/hooks/api/blog/useDeleteBlog';
+import { useState } from 'react';
+import ModalConfirmationDeleteBlog from '@/components/ModalConfirmationDeleteBlog';
 
 const BlogDetail = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
+
   const { blog, isLoading } = useGetBlog(Number(params.id));
+
   const { id } = useAppSelector((state) => state.user);
+
+  const { deleteBlog } = useDeleteBlog();
+
+  const [open, setOpen] = useState(false);
+
+  const onDeleteBlog = () => {
+    deleteBlog(Number(params.id));
+  };
 
   if (isLoading) {
     return (
@@ -44,13 +57,22 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
             </p>
 
             {id === blog.userId && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => router.push(`/${params.id}/edit`)}
-            >
-              <Edit size="20px" />
-            </Button>
+              <div className="flex gap-4 items-center">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setOpen(true)}
+                >
+                  <Trash2 size="20px" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => router.push(`/${params.id}/edit`)}
+                >
+                  <Edit size="20px" />
+                </Button>
+              </div>
             )}
           </div>
         </div>
@@ -68,6 +90,12 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
       <section>
         <Markdown content={blog.content} />
       </section>
+
+      <ModalConfirmationDeleteBlog
+        open={open}
+        setOpen={setOpen}
+        onDeleteBlog={onDeleteBlog}
+      />
     </main>
   );
 };

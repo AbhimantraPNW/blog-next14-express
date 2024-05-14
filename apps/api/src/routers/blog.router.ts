@@ -28,6 +28,11 @@ export class BlogRouter {
       uploader('IMG', '/images').array('thumbnail', 1),
       this.blogController.updateBlogsController,
     );
+    this.router.delete(
+      '/:id',
+      verifyToken,
+      this.blogController.deleteBlogsController,
+    );
   }
 
   getRouter(): Router {
