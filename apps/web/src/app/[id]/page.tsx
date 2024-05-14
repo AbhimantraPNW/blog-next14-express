@@ -5,13 +5,17 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import useGetBlog from '@/hooks/api/blog/useGetBlog';
 import { format } from 'date-fns';
-import { Share2 } from 'lucide-react';
+import { Edit, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import SkeletonBlogDetail from '../components/SkeletonBlogDetail';
 import { appConfig } from '@/utils/config';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/redux/hooks';
 
 const BlogDetail = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
   const { blog, isLoading } = useGetBlog(Number(params.id));
+  const { id } = useAppSelector((state) => state.user);
 
   if (isLoading) {
     return (
@@ -38,9 +42,16 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
               {format(new Date(blog.createdAt), 'dd MMMM yyyy')} -{' '}
               {blog.user.fullName}
             </p>
-            <Button variant="outline" size="icon">
-              <Share2 size="20px" />
+
+            {id === blog.userId && (
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => router.push(`/${params.id}/edit`)}
+            >
+              <Edit size="20px" />
             </Button>
+            )}
           </div>
         </div>
 

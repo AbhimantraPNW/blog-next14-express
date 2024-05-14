@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/button';
 import AuthGuard from '@/hoc/AuthGuard';
 import useCreateBlog from '@/hooks/api/blog/useCreateBlog';
 import { useAppSelector } from '@/redux/hooks';
-import { IFormCreatedBlog } from '@/types/blog.type';
+import { IFormBlog } from '@/types/blog.type';
+
 import { useFormik } from 'formik';
 import React from 'react';
 
@@ -25,7 +26,7 @@ const Write = () => {
     values,
     errors,
     touched,
-  } = useFormik<IFormCreatedBlog>({
+  } = useFormik<IFormBlog>({
     initialValues: {
       title: '',
       category: '',
