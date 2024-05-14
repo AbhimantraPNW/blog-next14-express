@@ -15,7 +15,7 @@ export interface Blog {
   user: User;
 }
 
-export interface IFormCreatedBlog {
+export interface IFormBlog {
   title: string;
   category: string;
   content: string;
