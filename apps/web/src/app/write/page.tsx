@@ -40,7 +40,7 @@ const Write = () => {
   });
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 mt-4">
       <form onSubmit={handleSubmit}>
         <div className="mx-auto flex max-w-5xl flex-col gap-4">
           <FormInput

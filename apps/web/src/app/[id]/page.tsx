@@ -43,7 +43,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <main className="container mx-auto px-4">
+    <main className="container mx-auto px-4 mt-3 mb-5">
       <section className="mb-4">
         <div className="mb-4 space-y-1.5">
           <Badge variant="outline" className="rounded-sm bg-green-100">

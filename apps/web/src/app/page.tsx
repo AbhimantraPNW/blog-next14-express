@@ -24,12 +24,12 @@ export default function Home() {
       {/* Jumbotron */}
       <section className="text-center mt-10">
         <h1 className="text-4xl font-bold">Blog Hub</h1>
-        <p className="text-xl">this is my blog bitch!</p>
+        <p className="text-xl">this is my blog!</p>
       </section>
       <Autocomplete />
 
       {/* Cards */}
-      <section className="grid grid-cols-3 gap-4">
+      <section className="grid grid-cols md:grid-cols-3 gap-4">
         {blogs.map((blog, index) => {
           return (
             <BlogCard

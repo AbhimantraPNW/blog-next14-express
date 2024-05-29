@@ -22,28 +22,37 @@ const BlogCard: FC<BlogCardProps> = ({
   author,
   imageUrl,
   createdAt,
-  blogId
+  blogId,
 }) => {
   return (
     <Link href={`/${blogId}`}>
-    <Card>
-      <CardHeader>
-        <div className="relative h-[220px] w-full overflow-hidden rounded-md">
-          <Image src={imageUrl} alt="thumbnail" className="object-cover" fill />
-        </div>
-      </CardHeader>
-      <CardContent>
-        <Badge variant="outline" className="rounded-sm bg-green-100">
-          {category}
-        </Badge>
-        <h2 className="line-clamp-2 text-lg font-semibold">{title}</h2>
-        <p className="text-sm font-light italic">
-          {format(createdAt, 'dd MMMM yyyy')} - {author}
-        </p>
-        <p className="line-clamp-3">{description}</p>
-      </CardContent>
-    </Card>
-
+      <Card className="group overflow-hidden rounded-md">
+        <CardHeader className="p-0">
+          <div className="relative h-[220px] w-full overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt="thumbnail"
+              className="object-cover transition-transform duration-300 group-hover:scale-110"
+              layout="fill"
+            />
+          </div>
+        </CardHeader>
+        <CardContent className="p-4 space-y-4">
+          <Badge
+            variant="outline"
+            className="rounded-sm bg-gradient-to-r from-green-400 to-blue-500 text-white px-2 py-1 text-xs font-semibold uppercase"
+          >
+            {category}
+          </Badge>
+          <h2 className="line-clamp-2 text-lg font-bold text-gray-800">
+            {title}
+          </h2>
+          <p className="text-sm font-light italic text-gray-600">
+            {format(createdAt, 'dd MMMM yyyy')} - {author}
+          </p>
+          <p className="line-clamp-3 text-gray-700">{description}</p>
+        </CardContent>
+      </Card>
     </Link>
   );
 };

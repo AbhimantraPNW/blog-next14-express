@@ -4,12 +4,14 @@ interface UserState {
   id: number;
   email: string;
   fullName: string;
+  createdAt: Date
 }
 
 const initialState: UserState = {
   id: 0,
   fullName: '',
   email: '',
+  createdAt: new Date()
 };
 
 export const userSlice = createSlice({
@@ -20,6 +22,7 @@ export const userSlice = createSlice({
       state.id = action.payload.id;
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
+      state.createdAt = action.payload.createdAt;
     },
 
     logoutAction: (state) => {
